@@ -1,25 +1,35 @@
+
 from flask import Flask, send_from_directory
 import os
 
 app = Flask(__name__)
 
-DOWNLOAD_FOLDER = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)),
-    "files"
-)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DOWNLOAD_FOLDER = os.path.join(BASE_DIR, "files")
+ZIP_FILE = "programs.zip"
 
 @app.route("/")
 def home():
     return """
-    <h2>Python Project Downloads</h2>
-    <a href="/download">Download Python Project ZIP</a>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Python Programs Download</title>
+    </head>
+    <body>
+        <a href="/download">Download</a>
+    </body>
+    </html>
     """
 
 @app.route("/download")
 def download():
+    if not os.path.isfile(os.path.join(DOWNLOAD_FOLDER, ZIP_FILE)):
+        return "ZIP file not found. Check the files folder and filename.", 404
+
     return send_from_directory(
         DOWNLOAD_FOLDER,
-        "my-python-project.zip",
+        ZIP_FILE,
         as_attachment=True
     )
 
