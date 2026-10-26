@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Programs</title>
+<style>
+</style>
+</head>
+<body>
+<main style="font-size: 13px;">
+<div class="list">
+{% for p in programs %}
+<div class="item">
+<div class="title">{{ p.title }}</div>
+<div class="actions">
+<button type="button" class="copy" data-file="{{ p.filename }}" style="width:fit-content; font-size: 10px;">Copy</button>
+<a class="download" href="{{ url_for('download', filename=p.filename) }}">Download</a>
+</div>
+</div>
+{% endfor %}
+</div>
+</main>
+<script>
+document.querySelectorAll(".copy").forEach(button=>{
+  button.addEventListener("click", async()=>{
+    try{
+      const response=await fetch("/copy/"+encodeURIComponent(button.dataset.file));
+      if(!response.ok) throw new Error("Could not load code");
+      const code=await response.text();
+      await navigator.clipboard.writeText(code);
+      button.textContent="Copied";
+      setTimeout(()=>button.textContent="Copy",1200);
+    }catch(error){
+      button.textContent="Copy failed";
+      setTimeout(()=>button.textContent="Copy",1500);
+    }
+  });
+});
+</script>
+</body>
+</html>
