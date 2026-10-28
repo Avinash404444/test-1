@@ -3,7 +3,7 @@ from pathlib import Path
 
 app = Flask(__name__)
 BASE_DIR = Path(__file__).resolve().parent
-PROGRAMS_DIR = BASE_DIR / "programs"
+PROGRAMS_DIR = BASE_DIR / "program"
 
 PROGRAMS = [
     {"filename": "p1.py", "title": "EXPLORE VARIOUS COLOR PALETTES IN SEABORN"},
