@@ -8,7 +8,7 @@ PROGRAMS_DIR = BASE_DIR / "programs"
 PROGRAMS = [
     {"filename": "p1.py", "title": "EXPLORE VARIOUS COLOR PALETTES IN SEABORN"},
     {"filename": "p2.py", "title": "CREATING DIFFERENT TYPES OF PLOTS USING MATPLOTLIB"},
-    {"filename": "p3.py", "title": "ASSESS STUDENT PERFORMANCE IN THE ANNUAL EXAMINATION USING BOXPLOT"}
+    {"filename": "p3.py", "title": "ASSESS STUDENT PERFORMANCE IN THE ANNUAL EXAMINATION USING BOXPLOT"},
 ]
 
 @app.route("/")
